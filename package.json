@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Reusable dynamic pivot dashboard (table + charts + saved queries) for Vue 3 + Quasar frontends and Node/Express + PostgreSQL backends. Schema/table-agnostic: data sources and fields are registered at runtime from the host application.",
   "main": "src/backend/index.js",
+  "exports": {
+    ".": "./src/backend/index.js",
+    "./frontend": "./src/frontend/index.js",
+    "./frontend/*": "./src/frontend/*",
+    "./backend/*": "./src/backend/*"
+  },
   "files": [
     "src",
     "README.md",
