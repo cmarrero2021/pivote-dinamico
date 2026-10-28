@@ -23,14 +23,30 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "graphql": "^16.0.0",
-    "graphql-http": "^1.22.0",
-    "pg": "^8.0.0"
+    "express": "^4.19.2",
+    "graphql": "^16.14.2",
+    "graphql-http": "^1.23.1",
+    "pg": "^8.23.1"
   },
   "peerDependenciesMeta": {
-    "graphql": { "optional": false },
-    "graphql-http": { "optional": false },
-    "pg": { "optional": true }
+    "express": {
+      "optional": false
+    },
+    "graphql": {
+      "optional": false
+    },
+    "graphql-http": {
+      "optional": false
+    },
+    "pg": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "express": "^4.19.2",
+    "graphql": "^16.14.2",
+    "graphql-http": "^1.23.1",
+    "pg": "^8.23.1"
   },
   "engines": {
     "node": ">=18"
