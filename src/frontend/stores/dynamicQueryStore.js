@@ -1,28 +1,11 @@
 // src/frontend/stores/dynamicQueryStore.js
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
+import { getHttp as http, getBasePath as _basePath } from '../http';
 
-// ─── HTTP client injection ───────────────────────────────────────────────────
-// The host application must provide its axios instance (e.g. Quasar's
-// boot/axios) BEFORE using any component of the package:
-//
-//   import { configurePivotApi } from 'dash-pivot/frontend';
-//   import { api } from 'boot/axios';
-//   configurePivotApi(api, { basePath: '/api/pivot' });
-let _api = null;
-let _basePath = '/api/pivot';
-
-export function configurePivotApi(api, { basePath } = {}) {
-  _api = api;
-  if (basePath) _basePath = basePath;
-}
-
-function http() {
-  if (!_api) {
-    throw new Error('dash-pivot: HTTP client not configured. Call configurePivotApi(api) before using the pivot store.');
-  }
-  return _api;
-}
+// The HTTP client is configured by the host application through
+// configurePivotApi() (see ../http.js). Re-exported here for convenience.
+export { configurePivotApi } from '../http';
 
 // ─── Catálogo de operadores de filtro ─────────────────────────────────────────
 // `kind`: 'text' | 'numeric' | 'date' — determina qué operadores mostrar según
@@ -567,7 +550,7 @@ function dynamicQuerySetup() {
   // ─── Saved queries ────────────────────────────────────────────────────────
   async function loadSavedQueries() {
     try {
-      const res = await http().get(`${_basePath}/saved-queries`, {
+      const res = await http().get(`${_basePath()}/saved-queries`, {
         params: { source: dataSource.value }
       });
       savedQueries.value = res.data || [];
@@ -613,9 +596,9 @@ function dynamicQuerySetup() {
 
     try {
       if (currentQueryId.value) {
-        await http().put(`${_basePath}/saved-queries/${currentQueryId.value}`, data);
+        await http().put(`${_basePath()}/saved-queries/${currentQueryId.value}`, data);
       } else {
-        const res = await http().post(`${_basePath}/saved-queries`, data);
+        const res = await http().post(`${_basePath()}/saved-queries`, data);
         currentQueryId.value = res.data.id;
       }
       currentQueryName.value = name;
@@ -703,7 +686,7 @@ function dynamicQuerySetup() {
   }
   async function deleteSavedQuery(id) {
     try {
-      await http().delete(`${_basePath}/saved-queries/${id}`);
+      await http().delete(`${_basePath()}/saved-queries/${id}`);
       if (currentQueryId.value === id) {
         clearConfig();
       }
@@ -723,7 +706,7 @@ function dynamicQuerySetup() {
     if (!currentQueryId.value) return false;
     try {
       const next = target === 'table' ? !pinTable.value : !pinChart.value;
-      const res = await http().put(`${_basePath}/saved-queries/${currentQueryId.value}/pin`, {
+      const res = await http().put(`${_basePath()}/saved-queries/${currentQueryId.value}/pin`, {
         target,
         value: next,
       });

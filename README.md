@@ -184,11 +184,31 @@ pivot.setPermissionHook(async ({ userId, roleId, source }) => {
 
 | Fase | Estado |
 |------|--------|
-| 1. Extracción del núcleo genérico (frontend + backend) | ✅ |
-| 2. Metadatos: autodetección de columnas + resolvers genéricos | ✅ |
-| 3. UI de administración de fuentes y campos | 🔜 (API lista, UI pendiente) |
-| 4. Migración del proyecto original como consumidor | 🔜 |
-| 5. Publicación npm + guía para proyectos nuevos | 🔜 |
+| 1. Extraccion del nucleo generico (frontend + backend) | ✅ |
+| 2. Metadatos: autodeteccion de columnas + resolvers genericos | ✅ |
+| 3. UI de administracion de fuentes y campos | ✅ |
+| 4. Migracion del proyecto original como consumidor | 🔜 |
+| 5. Publicacion npm + guia para proyectos nuevos | 🔜 |
+
+## Uso del panel de administracion
+
+```vue
+<template>
+  <!-- Solo administradores -->
+  <DataSourceAdminPanel />
+</template>
+
+<script setup>
+import { DataSourceAdminPanel } from 'dash-pivot/frontend';
+</script>
+```
+
+El panel permite:
+- Registrar nuevas tablas/vistas (el backend verifica que existan fisicamente).
+- Detectar automaticamente todas sus columnas desde `information_schema`.
+- Habilitar columnas con etiqueta visible, categoria y tipo (text/numeric/date).
+- Marcar columnas como multivalor (valores separados por coma).
+- Validar que las columnas activas sigan existiendo en la tabla.
 
 ## Licencia
 

@@ -19,15 +19,21 @@ import DynamicQueryPanel from './components/DynamicQueryPanel.vue';
 import PivotTable from './components/PivotTable.vue';
 import PivotChart from './components/PivotChart.vue';
 import FilterEditorPanel from './components/FilterEditorPanel.vue';
+import DataSourceAdminPanel from './components/admin/DataSourceAdminPanel.vue';
+import FieldsEditorDialog from './components/admin/FieldsEditorDialog.vue';
 import { configurePivotApi, useDynamicQueryStore, createDynamicQueryStore, FILTER_OPERATORS } from './stores/dynamicQueryStore';
+import { pivotAdminApi } from './admin/adminApi';
 
 export {
   DynamicQueryPanel,
   PivotTable,
   PivotChart,
   FilterEditorPanel,
+  DataSourceAdminPanel,
+  FieldsEditorDialog,
   configurePivotApi,
   useDynamicQueryStore,
   createDynamicQueryStore,
   FILTER_OPERATORS,
+  pivotAdminApi,
 };

@@ -43,7 +43,7 @@ module.exports = function createAdminRouter({ pool }) {
          WHERE table_schema = $1 AND table_name = $2 LIMIT 1`,
         [schema_name, table_name]
       );
-      if (!rows.length) {
+      if (!exists.rows.length) {
         return res.status(400).json({ error: `Schema.table ${schema_name}.${table_name} does not exist.` });
       }
       const { rows } = await pool.query(
@@ -100,6 +100,22 @@ module.exports = function createAdminRouter({ pool }) {
       res.json(columns);
     } catch (err) {
       res.status(500).json({ error: 'Error detecting columns', detail: err.message });
+    }
+  });
+
+  // List the saved (enabled or previously enabled) fields of a data source.
+  router.get('/datasources/:id/fields', async (req, res) => {
+    try {
+      const { rows } = await pool.query(
+        `SELECT id, field_key, column_name, display_label, category, field_type, is_multivalue, is_active
+         FROM pivot_fields
+         WHERE datasource_id = $1
+         ORDER BY category, display_label`,
+        [req.params.id]
+      );
+      res.json(rows);
+    } catch (err) {
+      res.status(500).json({ error: 'Error listing fields', detail: err.message });
     }
   });
 
