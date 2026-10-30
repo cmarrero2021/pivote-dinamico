@@ -21,6 +21,15 @@ import PivotChart from './components/PivotChart.vue';
 import FilterEditorPanel from './components/FilterEditorPanel.vue';
 import DataSourceAdminPanel from './components/admin/DataSourceAdminPanel.vue';
 import FieldsEditorDialog from './components/admin/FieldsEditorDialog.vue';
+import {
+  exportTableCSV,
+  exportTableJSON,
+  exportTableExcel,
+  exportRawJSON,
+  exportChartCSV,
+  exportChartJSON,
+  exportChartExcel,
+} from './components/pivotExports';
 import { configurePivotApi, useDynamicQueryStore, createDynamicQueryStore, FILTER_OPERATORS } from './stores/dynamicQueryStore';
 import { pivotAdminApi } from './admin/adminApi';
 
@@ -31,6 +40,14 @@ export {
   FilterEditorPanel,
   DataSourceAdminPanel,
   FieldsEditorDialog,
+  // Export helpers (Excel/CSV/JSON de tabla, gráfico y datos crudos)
+  exportTableCSV,
+  exportTableJSON,
+  exportTableExcel,
+  exportRawJSON,
+  exportChartCSV,
+  exportChartJSON,
+  exportChartExcel,
   configurePivotApi,
   useDynamicQueryStore,
   createDynamicQueryStore,

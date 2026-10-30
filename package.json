@@ -1,5 +1,5 @@
 {
-  "name": "dash-pivot",
+  "name": "pivote-dinamico",
   "version": "0.1.0",
   "description": "Reusable dynamic pivot dashboard (table + charts + saved queries) for Vue 3 + Quasar frontends and Node/Express + PostgreSQL backends. Schema/table-agnostic: data sources and fields are registered at runtime from the host application.",
   "main": "src/backend/index.js",
@@ -14,6 +14,15 @@
     "README.md",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmarrero2021/pivote-dinamico.git"
+  },
+  "homepage": "https://github.com/cmarrero2021/pivote-dinamico#readme",
+  "bugs": {
+    "url": "https://github.com/cmarrero2021/pivote-dinamico/issues"
+  },
+  "author": "cmarrero2021",
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0"
   },
