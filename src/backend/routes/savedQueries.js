@@ -27,7 +27,7 @@ module.exports = function createSavedQueriesRouter({ pool }) {
     const { source } = req.query;
     try {
       const hasSource = !!source;
-      const params = hasSource ? [userId, roleId, source] : [userId, roleId];
+      const queryParams = hasSource ? [userId, roleId, source] : [userId, roleId];
       const { rows } = await pool.query(
         `SELECT sq.*
          FROM pivot_saved_queries sq
@@ -42,7 +42,7 @@ module.exports = function createSavedQueriesRouter({ pool }) {
            )
            ${hasSource ? 'AND sq.source_key = $3' : ''}
          ORDER BY sq.updated_at DESC`,
-        params(userId, roleId, source)
+        queryParams
       );
       res.json(rows);
     } catch (err) {
